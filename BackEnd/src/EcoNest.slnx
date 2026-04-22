@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="EcoNest.API/EcoNest.API.csproj" />
+  <Project Path="EcoNest.Application/EcoNest.Application.csproj" />
+  <Project Path="EcoNest.Domain/EcoNest.Domain.csproj" />
+  <Project Path="EcoNest.Infrastructure/EcoNest.Infrastructure.csproj" />
+  <Project Path="EcoNest.Persistence/EcoNest.Persistence.csproj" />
+</Solution>
