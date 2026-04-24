@@ -1,25 +1,32 @@
+using Microsoft.EntityFrameworkCore;
+using EcoNest.Persistence.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Services
+builder.Services.AddDbContext<EcoNestDbContext>(options =>
+options.UseSqlServer(
+builder.Configuration.GetConnectionString("DefaultConnection")
+));
 
 builder.Services.AddControllers();
-//Change OpenAPI for Swagger.
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthorization(); 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Middleware
 if (app.Environment.IsDevelopment())
-{   
-    
-    app.MapSwagger();
+{
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseAuthorization(); 
 
 app.MapControllers();
 

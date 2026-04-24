@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EcoNest.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e937b4d0175af2c798ecd89a00dfdcd8b9a102ba")]
 [assembly: System.Reflection.AssemblyProductAttribute("EcoNest.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EcoNest.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
