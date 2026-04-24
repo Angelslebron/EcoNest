@@ -5,10 +5,11 @@ namespace EcoNest.Domain.Entities
     public class Observation : BaseEntity
     {
         public int ReservationId { get; set; }
-
+        public int? CabinId { get; set; }
         public string Comment { get; set; } = string.Empty;
 
         // Navigation
-        public Reservation Reservation { get; set; }
+        public Reservation Reservation { get; set; } = null!;
+        public Cabin? Cabin { get; set; }
     }
 }
