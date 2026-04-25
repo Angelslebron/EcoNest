@@ -4,7 +4,7 @@ using System.Text;
 
 namespace EcoNest.Domain.Core
 {
-    public abstract class Person
+    public abstract class Person : BaseEntity
     {
         public string Name { get; set; } = string.Empty;
         public string Surname { get; set; } = string.Empty;

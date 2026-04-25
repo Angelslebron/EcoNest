@@ -1,3 +1,4 @@
+using EcoNest.Domain.Enums;
 
 namespace EcoNest.Domain.Enums
 {

@@ -17,6 +17,6 @@ namespace EcoNest.Domain.Exceptions
 
     public class BusinessRuleException : DomainException
     {
-        BusinessRuleException(string message) : base(message) { }
+        public BusinessRuleException(string message) : base(message) { }
     }
 }
