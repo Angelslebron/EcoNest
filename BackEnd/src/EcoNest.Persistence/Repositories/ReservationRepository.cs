@@ -61,6 +61,7 @@ public class ReservationRepository(EcoNestDbContext context) : GenericRepository
 
     // En ReservationRepository.cs
     public Reservation GetByGuestAsync(int guestId)
+    Task<IEnumerable<Reservation>> IReservationRepository.GetByGuestAsync(int guestId)
     {
         throw new NotImplementedException();
     }
