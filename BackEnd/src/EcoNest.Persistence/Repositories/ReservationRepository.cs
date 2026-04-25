@@ -18,7 +18,7 @@ public class ReservationRepository(EcoNestDbContext context) : GenericRepository
             .Include(r => r.Payments)
             .FirstOrDefaultAsync(r => r.Id == id && r.IsActive);
 
-    public async Task<IEnumerable<Reservation>> GetByGuestAsync(int guestId)
+    public async Task<IEnumerable<Reservation>> GetByGuest(int guestId)
         => await _dbSet
             .Include(r => r.Cabin)
             .Include(r => r.Season)
@@ -59,7 +59,8 @@ public class ReservationRepository(EcoNestDbContext context) : GenericRepository
             && r.CheckInDate < checkOut
             && r.CheckOutDate > checkIn);
 
-    Task<Reservation?> IReservationRepository.GetByGuestAsync(int GuestId)
+    // En ReservationRepository.cs
+    public Reservation GetByGuestAsync(int guestId)
     {
         throw new NotImplementedException();
     }

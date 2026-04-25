@@ -6,16 +6,10 @@ using EcoNest.Domain.Exceptions;
 
 namespace EcoNest.Application.Services;
 
-public class MaintenanceService
+public class MaintenanceService(IMaintenanceRepository maintenanceRepository, ICabinRepository cabinRepository)
 {
-    private readonly IMaintenanceRepository _maintenanceRepository;
-    private readonly ICabinRepository _cabinRepository;
-
-    public MaintenanceService(IMaintenanceRepository maintenanceRepository, ICabinRepository cabinRepository)
-    {
-        _maintenanceRepository = maintenanceRepository;
-        _cabinRepository = cabinRepository;
-    }
+    private readonly IMaintenanceRepository _maintenanceRepository = maintenanceRepository;
+    private readonly ICabinRepository _cabinRepository = cabinRepository;
 
     public async Task<IEnumerable<MaintenanceResponse>> GetAllAsync()
     {
@@ -54,7 +48,7 @@ public class MaintenanceService
         };
 
         // Set cabin to maintenance status
-        cabin.Status = CabinStatus.Maintenance;
+        cabin.State = CabinStatus.Maintenance;
         await _cabinRepository.UpdateAsync(cabin);
 
         var created = await _maintenanceRepository.AddAsync(maintenance);
@@ -79,7 +73,7 @@ public class MaintenanceService
                 var cabin = await _cabinRepository.GetByIdAsync(item.CabinId);
                 if (cabin is not null)
                 {
-                    cabin.Status = CabinStatus.Available;
+                    cabin.State = CabinStatus.Available;
                     await _cabinRepository.UpdateAsync(cabin);
                 }
             }

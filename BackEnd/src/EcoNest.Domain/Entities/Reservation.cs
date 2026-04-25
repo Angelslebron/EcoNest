@@ -20,8 +20,8 @@ namespace EcoNest.Domain.Entities
         public Guest Guest { get; set; } = null!;
         public Season? Season { get; set; } = null!;
 
-        public ICollection<ReservationService> ReservationServices { get; set; } = new List<ReservationService>();
-        public ICollection<Payment> Payments { get; set; } = new List<Payment>();
-        public ICollection<Observation> Observations { get; set; } = new List<Observation>();
+        public ICollection<ReservationService> ReservationServices { get; set; } = [];
+        public ICollection<Payment> Payments { get; set; } = [];
+        public ICollection<Observation> Observations { get; set; } = [];
     }
 }

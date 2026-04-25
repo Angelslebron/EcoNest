@@ -6,24 +6,16 @@ using EcoNest.Domain.Exceptions;
 
 namespace EcoNest.Application.Services;
 
-public class ReservationService
+public class ReservationService(
+    IReservationRepository reservationRepository,
+    ICabinRepository cabinRepository,
+    IGuestRepository guestRepository,
+    ISeasonRepository seasonRepository)
 {
-    private readonly IReservationRepository _reservationRepository;
-    private readonly ICabinRepository _cabinRepository;
-    private readonly IGuestRepository _guestRepository;
-    private readonly ISeasonRepository _seasonRepository;
-
-    public ReservationService(
-        IReservationRepository reservationRepository,
-        ICabinRepository cabinRepository,
-        IGuestRepository guestRepository,
-        ISeasonRepository seasonRepository)
-    {
-        _reservationRepository = reservationRepository;
-        _cabinRepository = cabinRepository;
-        _guestRepository = guestRepository;
-        _seasonRepository = seasonRepository;
-    }
+    private readonly IReservationRepository _reservationRepository = reservationRepository;
+    private readonly ICabinRepository _cabinRepository = cabinRepository;
+    private readonly IGuestRepository _guestRepository = guestRepository;
+    private readonly ISeasonRepository _seasonRepository = seasonRepository;
 
     public async Task<IEnumerable<ReservationResponse>> GetAllAsync()
     {
@@ -61,7 +53,7 @@ public class ReservationService
             ?? throw new NotFoundException(nameof(Season), request.SeasonId);
 
         // Business rule: cabin must be available
-        if (cabin.Status == CabinStatus.Maintenance)
+        if (cabin.State == CabinStatus.Maintenance)
             throw new BusinessRuleException($"Cabin '{cabin.Name}' is currently under maintenance.");
 
         // Business rule: no date conflicts
@@ -89,7 +81,7 @@ public class ReservationService
         };
 
         // Update cabin status
-        cabin.Status = CabinStatus.Occupied;
+        cabin.State = CabinStatus.Occupied;
         await _cabinRepository.UpdateAsync(cabin);
 
         var created = await _reservationRepository.AddAsync(reservation);
@@ -132,7 +124,7 @@ public class ReservationService
         var cabin = await _cabinRepository.GetByIdAsync(reservation.CabinId);
         if (cabin is not null)
         {
-            cabin.Status = CabinStatus.Available;
+            cabin.State = CabinStatus.Available;
             await _cabinRepository.UpdateAsync(cabin);
         }
     }
@@ -144,7 +136,7 @@ public class ReservationService
             r.Cabin?.Name ?? string.Empty,
             r.GuestId,
             r.Guest is not null ? $"{r.Guest.Name} {r.Guest.Surname}" : string.Empty,
-            r.SeasonId,
+            r.SeasonId ?? 0,
             r.Season?.Name ?? string.Empty,
             r.CheckInDate,
             r.CheckOutDate,

@@ -4,19 +4,15 @@ using System.Text;
 
 namespace EcoNest.Domain.Exceptions
 {
-    public class DomainException : Exception
+    public class DomainException(string message) : Exception(message)
     {
-        public DomainException(string message) : base(message) { }
     }
 
-    public class NotFoundException : DomainException
+    public class NotFoundException(string entity, object key) : DomainException($"{entity} with id {key}  was not found.")
     {
-        public NotFoundException(string entity, object key)
-            : base($"{entity} with id {key}  was not found.") { }
     }
 
-    public class BusinessRuleException : DomainException
+    public class BusinessRuleException(string message) : DomainException(message)
     {
-        public BusinessRuleException(string message) : base(message) { }
     }
 }

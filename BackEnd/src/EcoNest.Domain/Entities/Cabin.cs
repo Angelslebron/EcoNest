@@ -12,10 +12,11 @@ namespace EcoNest.Domain.Entities
         public decimal BasePricePerDays { get; set; } 
         public CabinStatus State { get; set; } = CabinStatus.Available;
 
-        //Navegation
-        public ICollection<Reservation> Reservations {get; set;} = new List<Reservation>();
-        public ICollection<Observation> Observations {get; set;} = new List<Observation>();
-        public ICollection<Maintenance> Maintenances {get;set;} = new List<Maintenance>();
+        //Navigations
+        public ICollection<Reservation> Reservations { get; set; } = [];
+        public ICollection<Observation> Observations { get; set; } = [];
+
+        public ICollection<Maintenance> Maintenances { get; set; } = [];
 
     }
 }

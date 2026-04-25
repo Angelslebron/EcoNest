@@ -1,7 +1,6 @@
-﻿using EcoNest.Application.Services;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace EcoNest.Application;
+namespace EcoNest.Application.Services;
 
 public static class ApplicationServiceRegistration
 {
