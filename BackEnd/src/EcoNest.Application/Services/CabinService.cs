@@ -12,8 +12,8 @@ public class CabinService(ICabinRepository cabinRepository)
 
     public async Task<IEnumerable<CabinResponse>> GetAllAsync()
     {
-        var cabins = await _cabinRepository.GetAllAsync();
-        return cabins.Select(MapToResponse);
+        var cabin = await _cabinRepository.GetAllAsync();
+        return cabin.Select(MapToResponse);
     }
 
     public async Task<CabinResponse> GetByIdAsync(int id)
@@ -29,8 +29,8 @@ public class CabinService(ICabinRepository cabinRepository)
         if (checkOut <= checkIn)
             throw new BusinessRuleException("Check-out date must be after check-in date.");
 
-        var cabins = await _cabinRepository.GetAvailableAsync(checkIn, checkOut);
-        return cabins.Select(MapToResponse);
+        var cabin = await _cabinRepository.GetAvailableAsync(checkIn, checkOut);
+        return cabin.Select(MapToResponse);
     }
 
     public async Task<CabinResponse> CreateAsync(CreateCabinRequest request)

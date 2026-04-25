@@ -15,12 +15,12 @@ public class CabinsController(EcoNestDbContext context) : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCabins()
     {
-        var cabins = await _context.Cabins.ToListAsync();
+        var cabin = await _context.Cabins.ToListAsync();
 
-        if (cabins == null || cabins.Count == 0)
-            return NotFound("No cabins found.");
+        if (cabin == null || cabin.Count == 0)
+            return NotFound("No cabin found.");
 
-        return Ok(cabins);
+        return Ok(cabin);
     }
 
     [HttpGet("{id}")]
