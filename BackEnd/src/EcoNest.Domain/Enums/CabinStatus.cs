@@ -3,9 +3,9 @@ namespace EcoNest.Domain.Enums
 {
         public enum CabinStatus
     {
-        Available,
-        Occupied,
-        Maintenance
+        Available = 1,
+        Occupied = 2, 
+        Maintenance = 3
     }    
 
 }

@@ -10,20 +10,15 @@ namespace EcoNest.Domain.Entities
 
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
-
-        public int Nights { get; set; }
-
+        public ReservationStatus Status { get; set; } = ReservationStatus.Reserved;
         public decimal CostPerNight { get; set; }
-        public decimal TotalCost { get; set; }
-
-        public ReservationStatus Status { get; set; }
-
+        public decimal TotalCost { get; set; }      
         public string? Notes { get; set; }
 
-        // Navigation
-        public Cabin Cabin { get; set; }
-        public Guest Guest { get; set; }
-        public Season? Season { get; set; }
+        // Navigation properties
+        public Cabin Cabin { get; set; } = null!;
+        public Guest Guest { get; set; } = null!;
+        public Season? Season { get; set; } = null!;
 
         public ICollection<ReservationService> ReservationServices { get; set; } = new List<ReservationService>();
         public ICollection<Payment> Payments { get; set; } = new List<Payment>();

@@ -1,6 +1,10 @@
-public enum MaintenanceStatus
+
+namespace EcoNest.Domain.Enums
 {
-    Scheduled,
-    InProgress,
-    Completed
+    public enum MaintenanceStatus
+    {
+        Scheduled = 1,
+        InProgress = 2,
+        Completed = 3
+    }
 }
