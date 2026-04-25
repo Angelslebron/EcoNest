@@ -40,7 +40,7 @@ public class CabinConfiguration : IEntityTypeConfiguration<Cabin>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(c => c.Maintenances)
-            .WithOne(m => m.cabin)
+            .WithOne(m => m.Cabin)
             .HasForeignKey(m => m.CabinId)
             .OnDelete(DeleteBehavior.Cascade);
 

@@ -10,13 +10,13 @@ namespace EcoNest.Persistence.Repositories
     {
         public async Task<IEnumerable<Maintenance>> GetByCabinAsync(int cabinId)
             => await _dbSet
-                .Include(m => m.cabin)
+                .Include(m => m.Cabin)
                 .Where(m => m.CabinId == cabinId && m.IsActive)
                 .ToListAsync();
 
         public async Task<IEnumerable<Maintenance>> GetByStatusAsync(MaintenanceStatus status)
             => await _dbSet
-                .Include(m => m.cabin)
+                .Include(m => m.Cabin)
                 .Where(m => m.Status == status && m.IsActive)
                 .ToListAsync();
     }
