@@ -59,7 +59,7 @@ public class ReservationRepository(EcoNestDbContext context) : GenericRepository
             && r.CheckInDate < checkOut
             && r.CheckOutDate > checkIn);
 
-    Task<Reservation?> IReservationRepository.GetByGuestAsync(int GuestId)
+    Task<IEnumerable<Reservation>> IReservationRepository.GetByGuestAsync(int guestId)
     {
         throw new NotImplementedException();
     }
