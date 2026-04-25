@@ -14,7 +14,7 @@ namespace EcoNest.Domain.Entities
         public MaintenanceStatus Status { get; set; }
 
         // Navigation properties
-        public Cabin cabin { get; set; } = null!;
+        public Cabin Cabin { get; set; } = null!;
         
     }
 }

@@ -5,14 +5,9 @@ using EcoNest.Domain.Exceptions;
 
 namespace EcoNest.Application.Services;
 
-public class SeasonService
+public class SeasonService(ISeasonRepository seasonRepository)
 {
-    private readonly ISeasonRepository _seasonRepository;
-
-    public SeasonService(ISeasonRepository seasonRepository)
-    {
-        _seasonRepository = seasonRepository;
-    }
+    private readonly ISeasonRepository _seasonRepository = seasonRepository;
 
     public async Task<IEnumerable<SeasonResponse>> GetAllAsync()
     {

@@ -1,59 +1,62 @@
+using EcoNest.Application.DTOs.Cabin;
+using EcoNest.Application.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using EcoNest.Persistence;
-using EcoNest.Domain.Entities;
+using System;
 using System.Threading.Tasks;
 
 namespace EcoNest.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CabinsController(EcoNestDbContext context) : ControllerBase
+public class CabinsController(CabinService cabinService) : ControllerBase
 {
-    private readonly EcoNestDbContext _context = context;
+    private readonly CabinService _cabinService = cabinService;
 
+    // GET api/cabins
     [HttpGet]
-    public async Task<IActionResult> GetCabins()
+    public async Task<IActionResult> GetAll()
     {
-        var cabin = await _context.Cabins.ToListAsync();
-
-        if (cabin == null || cabin.Count == 0)
-            return NotFound("No cabin found.");
-
-        return Ok(cabin);
+        var result = await _cabinService.GetAllAsync();
+        return Ok(result);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetCabin(int id)
+    // GET api/cabins/5
+    [HttpGet("{id:int}")]
+    public async Task<IActionResult> GetById(int id)
     {
-        var cabin = await _context.Cabins.FindAsync(id);
-
-        if (cabin == null)
-            return NotFound();
-
-        return Ok(cabin);
+        var result = await _cabinService.GetByIdAsync(id);
+        return Ok(result);
     }
 
+    // GET api/cabins/available?checkIn=2025-12-01&checkOut=2025-12-05
+    [HttpGet("available")]
+    public async Task<IActionResult> GetAvailable([FromQuery] DateTime checkIn, [FromQuery] DateTime checkOut)
+    {
+        var result = await _cabinService.GetAvailableAsync(checkIn, checkOut);
+        return Ok(result);
+    }
+
+    // POST api/cabins
     [HttpPost]
-    public async Task<IActionResult> CreateCabin(Cabin cabin)
+    public async Task<IActionResult> Create([FromBody] CreateCabinRequest request)
     {
-        _context.Cabins.Add(cabin);
-        await _context.SaveChangesAsync();
-
-        return CreatedAtAction(nameof(GetCabin), new { id = cabin.Id }, cabin);
+        var result = await _cabinService.CreateAsync(request);
+        return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteCabin(int id)
+    // PUT api/cabins/5
+    [HttpPut("{id:int}")]
+    public async Task<IActionResult> Update(int id, [FromBody] UpdateCabinRequest request)
     {
-        var cabin = await _context.Cabins.FindAsync(id);
+        var result = await _cabinService.UpdateAsync(id, request);
+        return Ok(result);
+    }
 
-        if (cabin == null)
-            return NotFound();
-
-        _context.Cabins.Remove(cabin);
-        await _context.SaveChangesAsync();
-
+    // DELETE api/cabins/5
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _cabinService.DeleteAsync(id);
         return NoContent();
     }
 }
