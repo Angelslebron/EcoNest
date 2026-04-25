@@ -1,17 +1,14 @@
-﻿using EcoNest.Application.Core;
-using EcoNest.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using EcoNest.Domain.Entities;
 
-namespace EcoNest.Application.Interfaces
+namespace EcoNest.Application.Interfaces;
+
+public interface IGuestRepository
 {
-    public interface IGuestRepository : IGenericRepository<Guest>
-    {
-        Task<Guest?> GetByEmailAsync(string Email);
-        Task<Guest?> GetByDocumentIdAsync(string DocumentId);
-        Task<Guest?> GetWithReservationsAsync(int Id);
-        Task<IEnumerable<Guest>> SearchAsync(string Term);
-
-    }
+    Task<IEnumerable<Guest>> GetAllAsync();
+    Task<Guest?> GetByIdAsync(int id);
+    Task<IEnumerable<Guest>> SearchAsync(string term);
+    Task<Guest?> GetByDocumentIdAsync(string documentId);
+    Task<Guest> AddAsync(Guest guest);
+    Task UpdateAsync(Guest guest);
+    Task DeleteAsync(Guest guest);
 }

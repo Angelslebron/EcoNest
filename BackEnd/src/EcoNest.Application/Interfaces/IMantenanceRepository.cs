@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using EcoNest.Application.Core;
+using EcoNest.Domain.Entities;
+using EcoNest.Domain.Enums;
 
-namespace EcoNest.Application.Interfaces
+namespace EcoNest.Application.Interfaces;
+
+public interface IMaintenanceRepository : IGenericRepository<Maintenance>
 {
-    internal class IMantenanceRepository
-    {
-    }
+    Task<IEnumerable<Maintenance>> GetByCabinAsync(int cabinId);
+    Task<IEnumerable<Maintenance>> GetByStatusAsync(MaintenanceStatus status);
 }
+

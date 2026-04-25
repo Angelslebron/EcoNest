@@ -6,7 +6,7 @@ public record GuestResponse(
     string Surname,
     string Email,
     string PhoneNumber,
-    string Cedula,
+    string DocumentId,
     string Address,
     string Nationality
 );
@@ -16,7 +16,7 @@ public record CreateGuestRequest(
     string Surname,
     string Email,
     string PhoneNumber,
-    string Cedula,
+    string DocumentId,
     string Address,
     string Nationality
 );
@@ -26,7 +26,7 @@ public record UpdateGuestRequest(
     string? Surname,
     string? Email,
     string? PhoneNumber,
-    string? Cedula,
+    string? DocumentId,
     string? Address,
     string? Nationality
 );

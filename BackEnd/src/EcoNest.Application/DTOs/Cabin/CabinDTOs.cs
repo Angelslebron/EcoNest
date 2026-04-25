@@ -7,8 +7,8 @@ public record CabinResponse(
     string Name,
     string Location,
     int Capacity,
-    string Description,
-    CabinStatus Status
+    string? Description,
+    CabinStatus State
 );
 
 public record CreateCabinRequest(
@@ -23,6 +23,6 @@ public record UpdateCabinRequest(
     string? Location,
     int? Capacity,
     string? Description,
-    CabinStatus? Status
+    CabinStatus? State
 );
 

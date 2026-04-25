@@ -1,4 +1,5 @@
 ﻿using EcoNest.Domain.Entities;
+using EcoNest.Domain.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
